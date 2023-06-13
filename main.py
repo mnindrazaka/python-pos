@@ -47,31 +47,39 @@ class Shop:
 products = (Product("Pencil", 3000), Product("Book", 5000))
 
 shop = Shop(products)
-shop.printProducts()
+transaction = Transaction()
 
-option = int(input("Enter your option : "))
 
-if (shop.isOptionValid(option)):
-    transaction = Transaction()
+isAddItem = True
+
+while isAddItem:
+    shop.printProducts()
     
+    option = 0
+    while True:
+        option = int(input("Enter your option : "))
+        if (shop.isOptionValid(option)):
+            break
+        else:
+            print("Invalid option")
+
     item = TransactionItem()
-
     item.product = shop.getProductByOption(option)
-
     print("You choose " + item.product.name + " with price Rp." + str(item.product.price))
-
     item.amount = int(input("Enter amount : "))
-
-    print("Subtotal price is Rp. " + str(item.getTotal()))
-    
     transaction.addItem(item)
-    transaction.money = int(input("Enter money : "))
+    print("Now you need to pay Rp. " + str(transaction.getTotal() )) 
+        
+    isAddItem = input("Add more item (y/n) ? ").lower() == "y"
 
-    if (transaction.getChange() < 0):
-        print("you need Rp. " + str(transaction.getChange() * -1) + " more money")
-    elif (transaction.getChange() > 0):
-        print("your change is Rp. " + str(transaction.getChange()))
+while True:
+    transaction.money = int(input("Enter money : "))
+    if transaction.getChange() >= 0:
+        break
     else:
-        print("your money is enough")
+        print("you need Rp. " + str(transaction.getChange() * -1) + " more money")
+    
+if (transaction.getChange() > 0):
+    print("your change is Rp. " + str(transaction.getChange()))
 else:
-    print("Invalid option")
+    print("your money is enough")
