@@ -2,7 +2,6 @@ from product import Product
 from transaction import Transaction, TransactionItem
 from shop import Shop
 
-
 shop = Shop((Product("Pencil", 3000), Product("Book", 5000)))
 transaction = Transaction()
 
