@@ -1,14 +1,19 @@
+from product import Product
+
 class TransactionItem:
     def __init__(self):
-        self.product = None
+        self.product: Product | None = None
         self.amount = 0
 
     def getTotal(self):
-        return self.product.price * self.amount
+        if (self.product):
+            return self.product.price * self.amount
+        else:
+            return 0
 
 class Transaction:
     def __init__(self):
-        self.items = []
+        self.items: list[TransactionItem] = []
         self.money = 0
     
     def getTotal(self):
@@ -20,5 +25,5 @@ class Transaction:
     def getChange(self):
         return self.money - self.getTotal()
     
-    def addItem(self, item):
+    def addItem(self, item: TransactionItem):
         self.items.append(item)
