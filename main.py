@@ -9,7 +9,6 @@ isAddItem = True
 
 while isAddItem:
     shop.printProducts()
-    
     option = 0
     while True:
         option = int(input("Enter your option : "))
@@ -20,11 +19,11 @@ while isAddItem:
 
     item = TransactionItem()
     item.product = shop.getProductByOption(option)
-    print("You choose " + item.product.name + " with price Rp." + str(item.product.price))
+    print("You choose " + item.product.name +
+          " with price Rp." + str(item.product.price))
     item.amount = int(input("Enter amount : "))
     transaction.addItem(item)
-    print("Now you need to pay Rp. " + str(transaction.getTotal() )) 
-        
+    print("Now you need to pay Rp. " + str(transaction.getTotal()))
     isAddItem = input("Add more item (y/n) ? ").lower() == "y"
 
 while True:
@@ -33,7 +32,7 @@ while True:
         break
     else:
         print("you need Rp. " + str(transaction.getChange() * -1) + " more money")
-    
+
 if (transaction.getChange() > 0):
     print("your change is Rp. " + str(transaction.getChange()))
 else:
